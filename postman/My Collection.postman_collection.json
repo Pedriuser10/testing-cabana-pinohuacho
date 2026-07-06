@@ -1,0 +1,202 @@
+{
+  "info": {
+    "_postman_id": "5b471dbb-41b1-4c5d-ae95-b11cf8c2203e",
+    "name": "My Collection",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "56430177"
+  },
+  "item": [
+    {
+      "name": "Get data",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "postman-echo.com/get",
+          "host": [
+            "postman-echo",
+            "com"
+          ],
+          "path": [
+            "get"
+          ]
+        },
+        "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+      },
+      "response": []
+    },
+    {
+      "name": "Post data",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('CP-API-003 | Estado HTTP es 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test('CP-API-003 | Tiempo de respuesta menor a 500ms', function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(500);",
+              "});",
+              "",
+              "pm.test('CP-API-003 | Content-Type es application/json', function () {",
+              "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+              "});",
+              "",
+              "pm.test('CP-API-003 | Respuesta es un objeto JSON', function () {",
+              "    const body = pm.response.json();",
+              "    pm.expect(body).to.be.an('object');",
+              "});",
+              "",
+              "pm.test('CP-API-003 | El precio es un número mayor a 0', function () {",
+              "    const body = pm.response.json();",
+              "    const precio = body.price || body.precio || body.pricePerNight;",
+              "    pm.expect(precio).to.be.a('number');",
+              "    pm.expect(precio).to.be.above(0);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://cabanapinohuacho.mlarac.cl/api/precio",
+          "protocol": "https",
+          "host": [
+            "cabanapinohuacho",
+            "mlarac",
+            "cl"
+          ],
+          "path": [
+            "api",
+            "precio"
+          ]
+        },
+        "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+      },
+      "response": []
+    },
+    {
+      "name": "New Request",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('CP-API-006 | Estado HTTP es 200', function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test('CP-API-006 | Tiempo de respuesta menor a 500ms', function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+              "});\r",
+              "\r",
+              "pm.test('CP-API-006 | Respuesta contiene confirmación de reserva', function () {\r",
+              "    const texto = pm.response.text();\r",
+              "    const palabrasClave = ['confirmad', 'éxito', 'reserva', 'success', 'gracias'];\r",
+              "    const encontrado = palabrasClave.some(p => texto.toLowerCase().includes(p));\r",
+              "    pm.expect(encontrado).to.be.true;\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "guestName",
+              "value": "Pedro Huaiquiche ",
+              "type": "text",
+              "uuid": "4dc06fd9-7bda-4d1c-aecf-3dc5f311a4ba"
+            },
+            {
+              "key": "guestEmail",
+              "value": "pedro@test.cl",
+              "type": "text",
+              "uuid": "3bb674c1-c36c-4b8b-8dba-63efd22cc9e7"
+            },
+            {
+              "key": "guestPhone",
+              "value": "+56912345678",
+              "type": "text",
+              "uuid": "0601034c-d747-4d3f-ab1c-565040dc70bb"
+            },
+            {
+              "key": "checkIn",
+              "value": "2026-09-01",
+              "type": "text",
+              "uuid": "fc484f2b-0d99-4e1a-8141-2437474651f2"
+            },
+            {
+              "key": "checkOut",
+              "value": "2026-09-05",
+              "type": "text",
+              "uuid": "aa796c9b-1c5b-4b5b-9ff8-a9e3e761db46"
+            },
+            {
+              "key": "guests",
+              "value": "2",
+              "type": "text",
+              "uuid": "ce4f2f18-38e1-4b0a-8ef2-e0c1d07a066f"
+            },
+            {
+              "key": "notes",
+              "value": "Prueba Postam ",
+              "type": "text",
+              "uuid": "f38235fd-6c10-44ec-9fdc-e5355416b8eb"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://cabanapinohuacho.mlarac.cl/reservar",
+          "protocol": "https",
+          "host": [
+            "cabanapinohuacho",
+            "mlarac",
+            "cl"
+          ],
+          "path": [
+            "reservar"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
