@@ -1,0 +1,14 @@
+pm.test('CP-API-006 | Estado HTTP es 200', function () {
+    pm.response.to.have.status(200);
+});
+
+pm.test('CP-API-006 | Tiempo de respuesta menor a 500ms', function () {
+    pm.expect(pm.response.responseTime).to.be.below(500);
+});
+
+pm.test('CP-API-006 | Respuesta contiene confirmación de reserva', function () {
+    const texto = pm.response.text();
+    const palabrasClave = ['confirmad', 'éxito', 'reserva', 'success', 'gracias'];
+    const encontrado = palabrasClave.some(p => texto.toLowerCase().includes(p));
+    pm.expect(encontrado).to.be.true;
+});
